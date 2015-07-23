@@ -6,7 +6,7 @@ from antlr.DanceList_Med import DanceList_Med as DanceList_MedParser
  
 def main(argv):
     tree = getTree(argv[1])
-    print(tree)
+    print(tree.toStringTree().replace('\\n', '\n'))
 
 def getTree(filename):
     input = FileStream(filename)
