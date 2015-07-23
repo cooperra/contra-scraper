@@ -7,6 +7,7 @@ from antlr.DanceList_Med import DanceList_Med as DanceList_MedParser
 def main(argv):
     tree = getTree(argv[1])
     print(tree.toStringTree().replace('\\n', '\n'))
+    print(tree2dict(tree))
 
 def getTree(filename):
     input = FileStream(filename)
@@ -15,6 +16,24 @@ def getTree(filename):
     parser = DanceList_MedParser(stream)
     tree = parser.r()
     return tree
+
+def tree2dict(tree):
+    def obj2dict(obj_node):
+        obj_dict = {}
+        for p in obj_node.pair():
+            key = p.ID().symbol.text
+            value = get_value(p.value())
+            obj_dict[key] = value
+        return obj_dict
+    def get_value(val):
+        if val.obj():
+            return obj2dict(val.obj())
+        elif val.VALUE():
+            return val.VALUE().symbol.text
+        elif val.listItem():
+            return [get_value(item.value()) for item in val.listItem()]
+    return obj2dict(tree.obj())
+
 
 def process_dance_source(tree):
     source_data = {}

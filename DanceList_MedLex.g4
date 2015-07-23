@@ -2,15 +2,13 @@ lexer grammar DanceList_MedLex ;
 // default mode
 EOL : [\r\n]+ ;
 ID : [a-zA-Z_]+ ;
-COLON : ': ' -> pushMode(VALUE_M) ;
-LONECOLON : ':' ;
+COLON : ':' -> pushMode(VALUE_M) ;
 IND : '  ' ;
-DASH : '-' ;
-EVDASH : '- ' -> pushMode(VALUE_M) ;
+DASH : '-' -> pushMode(VALUE_M) ;
 
 HASHCOMMENT : '#' ~[\r\n]* EOL -> skip ;
 
 mode VALUE_M;
-
-VALUE : ~[\r\n]+ ;
+WS : [ \t]+ -> skip ;
+VALUE : ~[ \t\r\n]+ ~[\r\n]* ;
 EOL2 : EOL -> popMode, type(EOL) ;

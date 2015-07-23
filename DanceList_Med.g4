@@ -2,33 +2,23 @@ parser grammar DanceList_Med ;
 
 options { tokenVocab=DanceList_MedLex; }
 
-r : 
-pair // Title
-pair // Editor
-pair // HomeURL
-pair // BaseURL
-ID LONECOLON EOL event*
-ID LONECOLON EOL dance*
-EOF
-;
+r : obj[0] EOF
+         ;
 
-pair : ID COLON VALUE? EOL
-;
+obj[int ind] : pair[ind]+
+            ;
 
-event : IND eventData
-;
-
-dance :
-IND DASH EOL
-IND IND pair // Lo
-IND IND pair // Ti
-IND IND pair // Au
-IND IND pair // Fo
-IND IND ID LONECOLON EOL event2*
-;
-
-event2 : IND IND IND eventData
-;
-
-eventData : EVDASH VALUE EOL
+pair[int ind] : varind[ind] ID COLON value[ind]
           ;
+
+value[int ind] : EOL obj[ind+1] // object
+           | EOL listItem[ind+1]* // list
+           | VALUE? EOL // string or none
+           ;
+
+varind[int ind] : IND*? // TODO
+                ;
+
+
+listItem[int ind] : varind[ind] DASH value[ind]
+              ;
