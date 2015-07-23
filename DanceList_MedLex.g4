@@ -8,7 +8,7 @@ IND : '  ' ;
 DASH : '-' ;
 EVDASH : '- ' -> pushMode(VALUE_M) ;
 
-HASH : '#' ;
+HASHCOMMENT : '#' ~[\r\n]* EOL -> skip ;
 
 mode VALUE_M;
 

@@ -8,7 +8,6 @@ pair // Editor
 pair // HomeURL
 pair // BaseURL
 ID LONECOLON EOL event*
-HASH EOL
 ID LONECOLON EOL dance*
 EOF
 ;
