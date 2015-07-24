@@ -3,6 +3,7 @@ import sys
 from antlr4 import *
 from antlr.DanceList_MedLex import DanceList_MedLex as DanceList_MedLexer
 from antlr.DanceList_Med import DanceList_Med as DanceList_MedParser
+from IndentTokenFilter import IndentTokenFilter
  
 def main(argv):
     tree = getTree(argv[1])
@@ -12,7 +13,8 @@ def main(argv):
 def getTree(filename):
     input = FileStream(filename)
     lexer = DanceList_MedLexer(input)
-    stream = CommonTokenStream(lexer)
+    filteredSource = IndentTokenFilter(lexer)
+    stream = CommonTokenStream(filteredSource)
     parser = DanceList_MedParser(stream)
     tree = parser.r()
     return tree

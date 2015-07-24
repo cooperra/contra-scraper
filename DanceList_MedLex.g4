@@ -12,3 +12,8 @@ mode VALUE_M;
 WS : [ \t]+ -> skip ;
 VALUE : ~[ \t\r\n]+ ~[\r\n]* ;
 EOL2 : EOL -> popMode, type(EOL) ;
+
+mode UNUSED;
+
+DEDENT : IND* ;
+INDENT : IND* ;
