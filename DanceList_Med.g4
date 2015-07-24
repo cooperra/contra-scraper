@@ -16,20 +16,9 @@ value[int ind] : EOL obj[ind+1] // object
            | VALUE? EOL // string or none
            ;
 
-varind[int ind] : {$ind > 0}? IND varind[ind-1]
-                | {$ind == 0}? /* epsilon */
+varind[int ind] : IND*? // TODO
                 ;
 
-/*countind
-    returns [int i]
-    : {i=0} ( IND {i+=1 } )* ;
-
-/*countind
-    returns [int i]
-    : IND countind {i=1+$countind.i}
-    | {i=0}
-    ;
-*/
 
 listItem[int ind] : varind[ind] DASH value[ind]
               ;
