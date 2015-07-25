@@ -1,4 +1,4 @@
-from TokenFilter import TokenFilter
+from .TokenFilter import TokenFilter
 
 class IndentTokenFilter(TokenFilter):
     def __init__(self, source, lexer=None):

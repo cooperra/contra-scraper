@@ -1,4 +1,4 @@
-lexer grammar DanceList_MedLex ;
+lexer grammar YAMLLexer ;
 // default mode
 EOL : [\r\n]+ ;
 ID : [a-zA-Z_]+ ;

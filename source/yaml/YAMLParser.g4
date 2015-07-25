@@ -1,6 +1,6 @@
-parser grammar DanceList_Med ;
+parser grammar YAMLParser ;
 
-options { tokenVocab=DanceList_MedLex; }
+options { tokenVocab=YAMLLexer; }
 
 r : obj EOF
          ;
