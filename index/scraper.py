@@ -31,5 +31,8 @@ If the field contains a link, extract the href of that link into its own field."
     return map(process_row, rows[1:])
 
 if __name__ == '__main__':
-    sources_data = scrape_contra_index(open(sys.argv[1], encoding=ENCODING))
-    print(list(sources_data))
+    sources_data = list(scrape_contra_index(open(sys.argv[1], encoding=ENCODING)))
+    try:
+        print(sources_data)
+    except UnicodeEncodeError:
+        sys.stdout.buffer.write((repr(sources_data) + "\n").encode('UTF-8'))
