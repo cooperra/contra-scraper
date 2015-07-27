@@ -1,3 +1,5 @@
+#!/bin/env python
+import sys
 from bs4 import BeautifulSoup
 
 # Prevents poor markup from breaking everything
@@ -29,4 +31,5 @@ If the field contains a link, extract the href of that link into its own field."
     return map(process_row, rows[1:])
 
 if __name__ == '__main__':
-    sources_data = scrape_contra_index(open("Michael Dyck's Contradance Index_ Sources.html", encoding=ENCODING))
+    sources_data = scrape_contra_index(open(sys.argv[1], encoding=ENCODING))
+    print(list(sources_data))
