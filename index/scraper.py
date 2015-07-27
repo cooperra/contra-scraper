@@ -36,3 +36,12 @@ if __name__ == '__main__':
         print(sources_data)
     except UnicodeEncodeError:
         sys.stdout.buffer.write((repr(sources_data) + "\n").encode('UTF-8'))
+
+class Scraper:
+
+    def __init__(self):
+        pass
+
+    def load(self, inputstream):
+        source_data = list(scrape_contra_index(inputstream))
+        return source_data
