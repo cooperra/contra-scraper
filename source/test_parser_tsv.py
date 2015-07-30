@@ -23,11 +23,19 @@ def process_dance_source(tree):
     for metadatum in tree.pair():
         key = metadatum.ID().symbol.text
         value = metadatum.VALUE().symbol.text
-        source_metadata[key] = value;
+        if key not in source_metadata:
+            # first occurence; just assign directly
+            source_metadata[key] = value;
+        else:
+            # we've already have value(s) with this key, 
+            # so append to list of existing values
+            if type(source_metadata[key]) is not list:
+                # this is the second value, so we need to
+                # convert existing lone value to list of itself
+                source_metadata[key] = [source_metadata[key]]
+            # append new value to list
+            source_metadata[key].append(value)
     source_data['metadata'] = source_metadata
-    # events #TODO -- add multiple as list
-    #source_events = [event.eventData().VALUE().symbol.text for event in tree.event()]
-    #source_data['events'] = source_events
     # dances
     rows = [[f.symbol.text for f in row.FIELD()] for row in tree.row()]
     source_data['rows'] = rows
