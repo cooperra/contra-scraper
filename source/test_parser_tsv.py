@@ -18,11 +18,13 @@ def getTree(filename):
 
 def process_dance_source(tree):
     source_data = {}
+    source_metadata = {}
     # title, subtitle, editor, home_url, base_url, date_entered, date_modified, publisher, date_published, isbn, thanks
     for metadatum in tree.pair():
         key = metadatum.ID().symbol.text
         value = metadatum.VALUE().symbol.text
-        source_data[key] = value;
+        source_metadata[key] = value;
+    source_data['metadata'] = source_metadata
     # events #TODO -- add multiple as list
     #source_events = [event.eventData().VALUE().symbol.text for event in tree.event()]
     #source_data['events'] = source_events
