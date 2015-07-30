@@ -20,7 +20,7 @@ def process_dance_source(tree):
     source_data = {}
     # title, subtitle, editor, home_url, base_url, date_entered, date_modified, publisher, date_published, isbn, thanks
     for metadatum in tree.pair():
-        key = metadatum.HASHKEY().ID().symbol.text
+        key = metadatum.ID().symbol.text
         value = metadatum.VALUE().symbol.text
         source_data[key] = value;
     # events #TODO -- add multiple as list

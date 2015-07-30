@@ -4,6 +4,6 @@ options { tokenVocab=TSVLexer; }
 
 r : (pair|row)* EOF ;
 
-pair : HASHKEY SEP VALUE EOL ;
+pair : LT ID GT VALUE EOL ;
 
 row : FIELD (SEP FIELD)* EOL ;
