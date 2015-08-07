@@ -3,13 +3,7 @@ from .TokenFilter import TokenFilter
 class IndentTokenFilter(TokenFilter):
     def __init__(self, source, lexer=None):
         super().__init__(source)
-        self.indents = [0]
-        self.newLineFlag = True
-        """True when we're at the start of a line for the first time"""
-        self.eofFound = False
-        """True once we've delt with the special case of EOF"""
-        self.tokenQueue = []
-        """Push to front, pop from back"""
+        self._reset()
         if lexer is None:
             lexer = source
         self.EOF = -1 # Token.EOF
@@ -17,6 +11,19 @@ class IndentTokenFilter(TokenFilter):
         self.IND = lexer.IND
         self.INDENT = lexer.INDENT
         self.DEDENT = lexer.DEDENT
+
+    def reset(self):
+        super().reset()
+        self._reset()
+
+    def _reset(self):
+        self.indents = [0]
+        self.newLineFlag = True
+        """True when we're at the start of a line for the first time"""
+        self.eofFound = False
+        """True once we've delt with the special case of EOF"""
+        self.tokenQueue = []
+        """Push to front, pop from back"""
 
     def popToken(self):
         if len(self.tokenQueue) == 0:

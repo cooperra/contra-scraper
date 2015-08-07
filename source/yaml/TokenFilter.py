@@ -8,6 +8,9 @@ class TokenFilter(TokenSource):
         # copy attributes
         self._factory = source._factory
 
+    def reset(self):
+        self._source.reset()
+
     def nextToken(self):
         """Override this method."""
         return self._source.nextToken()
