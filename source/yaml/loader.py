@@ -2,6 +2,7 @@ from .antlr_gen.YAMLLexer import YAMLLexer as Lexer
 from .antlr_gen.YAMLParser import YAMLParser as Parser
 from .IndentTokenFilter import IndentTokenFilter
 from antlr4 import CommonTokenStream, FileStream
+from collections import OrderedDict
 
 class Loader:
     def __init__(self, inputstream=None):
@@ -33,7 +34,7 @@ class Loader:
     @staticmethod
     def tree2dict(tree):
         def obj2dict(obj_node):
-            obj_dict = {}
+            obj_dict = OrderedDict()
             for p in obj_node.pair():
                 key = p.ID().symbol.text
                 value = get_value(p.value())

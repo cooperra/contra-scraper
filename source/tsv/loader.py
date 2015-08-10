@@ -1,6 +1,7 @@
 from .antlr_gen.TSVLexer import TSVLexer as Lexer
 from .antlr_gen.TSVParser import TSVParser as Parser
 from antlr4 import CommonTokenStream, FileStream
+from collections import OrderedDict
 
 class Loader:
     def __init__(self, inputstream=None):
@@ -30,7 +31,7 @@ class Loader:
     @staticmethod
     def tree2dict(tree):
         data = {}
-        metadata = {}
+        metadata = OrderedDict()
         for metadatum in tree.pair():
             key = metadatum.ID().symbol.text
             value = metadatum.VALUE().symbol.text
