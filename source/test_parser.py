@@ -1,6 +1,7 @@
 #!/bin/env python
 import sys
 import yaml, tsv
+from pprint import pprint
 
 def main(argv):
     format_choices = {"yaml": yaml, "tsv": tsv}
@@ -20,7 +21,7 @@ def main(argv):
         else:
             # Successful load
             break
-    print(data)
+    pprint(data)
 
 def guess_format(filename):
     f = open(filename)
