@@ -56,3 +56,11 @@ class Loader:
         result = OrderedDict(d['metadata'])
         result[record_name] = d['rows']
         return result
+
+    @staticmethod
+    def with_field_names(d, field_names, record_name='rows'):
+        result = d.copy()
+        result[record_name] = []
+        for r in d[record_name]:
+            result[record_name].append( OrderedDict(zip(field_names, r)) )
+        return result
