@@ -21,6 +21,16 @@ def main(argv):
         else:
             # Successful load
             break
+
+    if format == 'tsv':
+        # Do tsv-specific enhancements
+        # Helps match yaml output's structure
+        data = tsv.Loader.flattened_dict(data, "dances")
+        data = tsv.Loader.with_field_names(data, ["code", "lo", "ti", "au", "fo", "unknown1", "unknown2", "unknown3", "unknown4", "unknown5"], "dances")
+        for dance in data["dances"]:
+            # "code" is redundant
+            del dance["code"]
+
     pprint(data)
 
 def guess_format(filename):
