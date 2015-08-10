@@ -50,3 +50,9 @@ class Loader:
         data['metadata'] = metadata
         data['rows'] = [[f.symbol.text for f in row.FIELD()] for row in tree.row()]
         return data
+
+    @staticmethod
+    def flattened_dict(d, record_name='rows'):
+        result = OrderedDict(d['metadata'])
+        result[record_name] = d['rows']
+        return result
