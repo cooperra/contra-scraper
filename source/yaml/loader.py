@@ -28,7 +28,10 @@ class Loader:
         return self.tree2dict(tree)
 
     def load_file(self, filename):
-        self.set_input(FileStream(filename))
+        try:
+            self.set_input(FileStream(filename))
+        except UnicodeDecodeError:
+            self.set_input(FileStream(filename, encoding="Latin-1"))
         return self.load()
 
     @staticmethod
