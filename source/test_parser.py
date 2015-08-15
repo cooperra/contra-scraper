@@ -4,13 +4,17 @@ import yaml, tsv
 from pprint import pprint
 
 def main(argv):
+    data = load_file(argv[1])
+    pprint(data)
+
+def load_file(filename):
     format_choices = {"yaml": yaml, "tsv": tsv}
     remaining_format_choices = set(format_choices.keys())
-    format = guess_format(argv[1])
+    format = guess_format(filename)
     remaining_format_choices.remove(format)
     while True:
         try:
-            data = format_choices[format].load_file(argv[1])
+            data = format_choices[format].load_file(filename)
         except Exception as e:
             if len(remaining_format_choices) > 0:
                 # Load failed; try another format
@@ -31,7 +35,7 @@ def main(argv):
             # "code" is redundant
             del dance["code"]
 
-    pprint(data)
+    return data
 
 def guess_format(filename):
     f = open(filename)
