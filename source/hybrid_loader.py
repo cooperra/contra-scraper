@@ -14,6 +14,8 @@ def load_file(filename):
                 format = remaining_format_choices.pop()
             else:
                 # Out of formats; fail
+                import sys
+                print("Couldn't parse \"{}\"".format(filename), file=sys.stderr)
                 raise e
         else:
             # Successful load
