@@ -31,7 +31,7 @@ def load_file(filename):
     return data
 
 def guess_format(filename):
-    f = open(filename)
+    f = open(filename, 'rb')
     line = f.readline()
     # Find first non-empty line
     while len(line) <= 1 and line != "":
