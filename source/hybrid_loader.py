@@ -1,4 +1,4 @@
-import yaml, tsv
+from . import yaml, tsv
 
 def load_file(filename):
     format_choices = {"yaml": yaml, "tsv": tsv}
