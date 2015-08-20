@@ -91,12 +91,13 @@ def sync_index(from_file=None):
     
     # delete removed sources
     # TODO backup also?
-    bulkOp = db.sources.initializeUnorderedBulkOp()
-    for s in deleted_sources:
-        bulkOp.find({"index.code": deleted_source["code"]}).remove()
-        #bulkOp.find({"_id": deleted_source["_id"]}).remove()
-    bulk_result = bulkOp.execute()
-    print(bulk_result)
+    if len(deleted_sources) > 0:
+        bulkOp = db.sources.initialize_unordered_bulk_op()
+        for s in deleted_sources:
+            bulkOp.find({"index.code": deleted_source["code"]}).remove()
+            #bulkOp.find({"_id": deleted_source["_id"]}).remove()
+        bulk_result = bulkOp.execute()
+        print(bulk_result)
 
 def sync_source(source_index_data, use_cached=True):
     if use_cached:
