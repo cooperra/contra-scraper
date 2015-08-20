@@ -122,7 +122,5 @@ def test():
 
 test()
 
-for a in db.sources.find():
-    print(a["index"]["code"])
-
-
+result=[a["index"]["code"] for a in db.sources.find()]
+print(result, len(result))
